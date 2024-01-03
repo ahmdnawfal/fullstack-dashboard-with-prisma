@@ -34,12 +34,7 @@ export default function FormLogin() {
     });
 
     if (signInData?.ok) {
-      toast({
-        title: 'Welcome to dashboard',
-      });
-      form.reset();
-      setIsLoading(false);
-      redirectTo('/dashboard');
+      window.location.reload();
     } else {
       toast({
         variant: 'destructive',
