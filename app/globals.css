@@ -74,10 +74,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-.bg-auth {
-  background-image: url(/assets/images/bg-auth.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
