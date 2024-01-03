@@ -6,7 +6,7 @@ export default async function Home() {
 
   if (session) {
     redirect('/dashboard');
+  } else {
+    redirect('/login');
   }
-
-  return <p>Hello world</p>;
 }
