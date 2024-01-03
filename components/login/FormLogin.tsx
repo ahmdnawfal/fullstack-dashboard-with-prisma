@@ -10,7 +10,6 @@ import { useState } from 'react';
 import { useToast } from '../ui/use-toast';
 import { loginSchema } from '@/lib/formSchema';
 import { signIn } from 'next-auth/react';
-import { redirectTo } from '@/lib/action';
 import Link from 'next/link';
 
 export default function FormLogin() {
