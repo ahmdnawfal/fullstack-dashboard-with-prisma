@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const token =
     req.cookies.get('next-auth.session-token')?.value ||
     req.cookies.get('__Secure-next-auth.session-token')?.value;
@@ -13,6 +13,14 @@ export function middleware(req: NextRequest) {
     return;
   }
 
+  if (req.nextUrl.pathname === '/' && !token) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
+
+  if (req.nextUrl.pathname === '/' && token) {
+    return NextResponse.redirect(new URL('/dashboard', req.url));
+  }
+
   if (req.nextUrl.pathname.startsWith('/login') && token) {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
@@ -21,11 +29,11 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
-  if (req.nextUrl.pathname.startsWith('/') && token) {
-    return NextResponse.rewrite(new URL('/dashboard', req.url));
+  if (req.nextUrl.pathname.startsWith('/dashboard') && !token) {
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
-  if (req.url.includes('/') && !token) {
+  if (req.nextUrl.pathname.startsWith('/dashboard/:path*') && !token) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 }
