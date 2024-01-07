@@ -20,7 +20,7 @@ const ButtonLogout = () => {
       disabled={isLoading}
       onClick={handleLogout}
       type='button'
-      className='disabled:bg-slate-400'
+      className='disabled:bg-slate-400 w-full'
     >
       {isLoading ? 'Loading...' : 'Logout'}
     </Button>

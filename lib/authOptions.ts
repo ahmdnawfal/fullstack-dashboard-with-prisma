@@ -67,12 +67,6 @@ const authOptions: AuthOptions = {
     async session({ session, token }) {
       session.user = token;
 
-      const expDate = dayjs(session.expires).format(
-        'YYYY-MM-DDTHH:mm:ss.SSS[Z]'
-      );
-
-      console.log(expDate, 'exp date');
-
       return session;
     },
   },
