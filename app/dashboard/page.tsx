@@ -8,6 +8,7 @@ import { stats } from '@/data/stats';
 import { getUser } from '@/hooks/getUser';
 import { optionRole, optionSort } from '@/lib/options';
 import { PropsParams } from '@/types/search-params';
+import { Suspense } from 'react';
 
 type PropsSearchParams = {
   searchParams: PropsParams;
@@ -58,8 +59,11 @@ export default async function Page({ searchParams }: PropsSearchParams) {
           />
         </div>
       </div>
+
       <div>
-        <DataTable columns={columnsUser} data={data} />
+        <Suspense fallback={<p>loading...</p>}>
+          <DataTable columns={columnsUser} data={data} />
+        </Suspense>
       </div>
       <div className='flex flex-col gap-2'>
         <Pagination total={total} />
