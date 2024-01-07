@@ -61,9 +61,7 @@ export default async function Page({ searchParams }: PropsSearchParams) {
       </div>
 
       <div>
-        <Suspense fallback={<p>loading...</p>}>
-          <DataTable columns={columnsUser} data={data} />
-        </Suspense>
+        <DataTable columns={columnsUser} data={data} />
       </div>
       <div className='flex flex-col gap-2'>
         <Pagination total={total} />

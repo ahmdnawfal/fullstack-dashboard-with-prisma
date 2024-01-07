@@ -1,5 +1,6 @@
 'use client';
 
+import { usePagination } from '@/store/usePagination';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ResponsivePagination from 'react-responsive-pagination';
@@ -10,6 +11,7 @@ type PropPagintaion = {
 };
 
 const Pagination = ({ total }: PropPagintaion) => {
+  const setIsLoading = usePagination((state: any) => state.setIsLoading);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -29,9 +31,11 @@ const Pagination = ({ total }: PropPagintaion) => {
     setCurrentPage(queryPage || 1);
   }, [queryPage]);
 
-  const onChangePagination = (newPage: number) => {
-    setCurrentPage(newPage);
-    createPageURL(newPage);
+  const onChangePagination = async (newPage: number) => {
+    setIsLoading(true);
+    await createPageURL(newPage);
+    await setCurrentPage(newPage);
+    setIsLoading(false);
   };
 
   return (
